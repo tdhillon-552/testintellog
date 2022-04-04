@@ -1,0 +1,18 @@
+{% load getlabel %}
+<html>
+<body>
+<h2>List of MasterRecords</h2>
+{% for list in object_list %}
+    case: {{ list.case_number }}<br>
+    violation: {{ list.violation }}<br>
+    <br>
+    <br>
+    Additional Details:
+    {% for key, value in list.additional_detail.items %}
+        {{ key|label:'bolo' }} {{ value }}
+
+    {% endfor %}
+{% endfor %}
+
+</body>
+</html>

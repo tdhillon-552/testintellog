@@ -1,0 +1,16 @@
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+<html>
+<body>
+<form method="post">
+    {% csrf_token %}
+{% for master_items in master_record_data %}
+    {{ master_items|as_crispy_field }}
+{% endfor %}
+    {% for bolo_items in BOLO_additional_data %}
+        {{ bolo_items|as_crispy_field }}
+    {% endfor %}
+    <button>Submit</button>
+</form>
+</body>
+</html>
