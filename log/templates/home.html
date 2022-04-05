@@ -1,6 +1,6 @@
+{% load static %}
 <html>
-<h1>
-    Home
-</h1>
-<a href="/entry/dailylog">DL entry page</a>
+<h1>Home</h1>
+<a href="{% url 'createdailylog' %}">DL entry page</a>
+<a href="{% url 'createbolo' %}">bolo entry page</a>
 </html>

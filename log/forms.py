@@ -1,10 +1,9 @@
 
 from django import forms
-from .models import MasterRecordTypes, AdditionalDetails
+from .models import AdditionalDetails, PersonTypes
 
 
 class MasterRecordForm(forms.Form):
-    type = forms.ModelChoiceField(label='Type', queryset=MasterRecordTypes.objects.filter(is_active=True))
     violation = forms.CharField(max_length=10, label='Violation')
     date = forms.DateField(label='Date')
     time = forms.TimeField(label='Time')
@@ -16,10 +15,22 @@ class MasterRecordForm(forms.Form):
     rms_id = forms.IntegerField()
 
 
+class PersonsForm(forms.Form):
+    entity_type  =                 forms.ModelChoiceField(queryset=PersonTypes.objects.filter(is_active=True))
+    last_name    =                 forms.CharField(max_length=50)
+    first_name   =                 forms.CharField(max_length=50)
+
+
 class DailyLogAdditionalDetails(forms.Form):
-    bogus_field1 = forms.BooleanField()
-    bogus_field2 = forms.CharField()
-    bogus_field3 = forms.CharField(widget=forms.Textarea)
+    type_check = AdditionalDetails.objects.filter(is_active=True).filter(form__type='Daily Log')
+
+    for items in type_check:
+        if items.type.__str__() == 'checkbox':
+            locals()['x' + items.pk.__str__()] = forms.BooleanField(label=items.display_name)
+        elif items.type.__str__() == 'text box':
+            locals()['x' + items.pk.__str__()] = forms.CharField(label=items.display_name)
+        elif items.type.__str__() == 'numerical value':
+            locals()['x' + items.pk.__str__()] = forms.IntegerField(label=items.display_name)
 
 
 class BOLOAdditionalFields(forms.Form):
@@ -33,3 +44,5 @@ class BOLOAdditionalFields(forms.Form):
             locals()['x'+items.pk.__str__()] = forms.CharField(label=items.display_name)
         elif items.type.__str__() == 'numerical value':
             locals()['x'+items.pk.__str__()] = forms.IntegerField(label=items.display_name)
+
+

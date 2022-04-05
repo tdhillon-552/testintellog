@@ -94,11 +94,11 @@ class Vehicles(models.Model):
 
 
 class Persons(models.Model):
-    created    =                 models.DateTimeField(auto_now_add=True)
-    master_record_id = models.ForeignKey('MasterRecords', on_delete=models.CASCADE)
-    entity_type       =                 models.ForeignKey('PersonTypes', on_delete=models.CASCADE)
-    last_name  =                 models.CharField(max_length=50)
-    first_name =                 models.CharField(max_length=50)
+    created            =                 models.DateTimeField(auto_now_add=True)
+    master_record_id   =                 models.ForeignKey('MasterRecords', on_delete=models.CASCADE)
+    entity_type        =                 models.ForeignKey('PersonTypes', on_delete=models.CASCADE)
+    last_name          =                 models.CharField(max_length=50)
+    first_name         =                 models.CharField(max_length=50)
 
 
 class Attachments(models.Model):

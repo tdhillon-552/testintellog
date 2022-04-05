@@ -4,6 +4,8 @@ from .views import ListMasterRecords
 
 urlpatterns = [
     path('', views.home, name='home'),
-    path('entry/dailylog', views.daily_log_view, name='dailylogview'),
+    path('entry/dailylog', views.CreateDailyLog.as_view(), name='createdailylog'),
+    path('entry/bolo', views.CreateBolo.as_view(), name='createbolo'),
+
     path('search/dailylog', ListMasterRecords.as_view(), name='listmasterrecords')
 ]
